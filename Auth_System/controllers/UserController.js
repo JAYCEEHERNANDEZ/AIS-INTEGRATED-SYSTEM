@@ -17,10 +17,24 @@ export const fetchuser = async (req, res) => {
 
 
 export const Register = async (req, res) => {
-    const {name, birthdate, address, program, studentStatus, email, password } = req.body;
+    const { firstName,
+        lastName,
+        dob,
+        address,
+        course,
+        major,
+        status,
+        email,
+        password } = req.body;
 
     try {
-        const userProfile = {name, birthdate, address, program, studentStatus};
+        const userProfile = {firstName,
+            lastName,
+            dob,
+            address,
+            course,
+            major,
+            status};
         const userId = await userModel.createUser(userProfile, email, password);
         res.status(200).json({success: true, message: userId}); 
     } catch (e) {
