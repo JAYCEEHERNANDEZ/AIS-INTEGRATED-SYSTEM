@@ -20,3 +20,32 @@ export const registerStudent= async (req, res) => {
         })
     }
 }
+
+export const fetchStudents = async (req, res) => {
+    try {
+        const response = await fetch("https://ais-simulated-legacy.onrender.com/api/students");
+        const data = await response.json();
+
+        res.json(data); // ✅ return SAME JSON
+    } catch (error) {
+        res.status(500).json({
+            error: "Failed to fetch from legacy system"
+        });
+    }
+};;
+
+export const getStudentById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const response = await fetch(
+            `https://ais-simulated-legacy.onrender.com/api/students/${id}`
+        );
+
+        const data = await response.json();
+
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch student by ID" });
+    }
+};

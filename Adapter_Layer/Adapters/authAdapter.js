@@ -19,3 +19,32 @@ export const create = async (profile) => {
         return await response.json();
     }
     
+export const getAllStudents = async () => {
+    try {
+        const response = await fetch(
+            `https://ais-simulated-legacy.onrender.com/api/students`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch students");
+        }
+
+        const data = await response.json();
+
+
+        const transformed = data.map(student => ({
+            id: student.id,
+            name: student.name,
+            birthdate: student.birthdate,
+            program: student.program,
+            address: student.address,
+            status: student.studentStatus
+        }));
+
+        return transformed;
+
+    } catch (error) {
+        console.error("Error fetching students:", error);
+        throw error;
+    }
+};

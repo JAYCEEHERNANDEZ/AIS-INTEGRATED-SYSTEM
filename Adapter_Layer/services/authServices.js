@@ -32,3 +32,12 @@ export const registerStudent = async (studentProfile) => {
 
     return await AuthAdapter.create(studentProfile);
 }
+
+export const getStudents = async () => {
+    try {
+        const students = await AuthAdapter.getAllStudents();
+        return students;
+    } catch (error) {
+        throw new Error("Failed to fetch students");
+    }
+};
